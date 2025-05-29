@@ -1,4 +1,4 @@
-# AstrID
+# **AstrID** - *Astronomical IDentification*
 *AstrID:* A project focused on identifying and classifying astronomical objects using data from various space catalogs. Leveraging machine learning, AstrID aims to enhance our understanding of stars, galaxies, and other celestial phenomena.
 
 ## Project Goals and Objectives
@@ -266,3 +266,99 @@ The `dataGathering` module contains several important functions that facilitate 
    - `importDataset`: Imports the dataset by reading FITS files from a specified directory and extracting images, masks, and star data.
 
 These functions work together to streamline the process of preparing and visualizing our dataset, ensuring that we have high-quality data for training and validating our model.
+
+## Project Structure
+```
+AstrID/
+├── data/               # Dataset storage
+├── docs/              # Documentation files
+├── exploration/       # Initial exploration notebooks
+├── finalDemo/        # Final demonstration files
+├── log/              # Training logs
+├── models/           # Saved model weights
+├── presentation/     # Presentation materials
+├── results/          # Results and visualizations
+├── scripts/          # Utility scripts
+├── .venv/            # Virtual environment
+├── dataGathering.ipynb    # Data collection notebook
+├── trainModel.ipynb       # Model training notebook
+├── validateModel.ipynb    # Model validation notebook
+└── requirements.txt       # Project dependencies
+```
+
+## Requirements
+- Python 3.10+
+- CUDA 11.8 (for GPU support)
+- cuDNN 8.6 (for GPU support)
+- NVIDIA Driver 525+ (for GPU support)
+- Git LFS (for large file storage)
+
+## Development
+### Setting Up Development Environment
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/AstrID.git
+   cd AstrID
+   ```
+
+2. Install Git LFS:
+   ```bash
+   sudo apt-get install git-lfs
+   git lfs install
+   ```
+
+3. Create and activate virtual environment:
+   ```bash
+   python3.10 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Data Format
+The project uses FITS (Flexible Image Transport System) files with the following structure:
+1. Primary HDU: Main image data (2D array of pixel values)
+2. Star Catalog HDU: Binary table containing star information
+3. Pixel Mask HDU: Ground truth mask (2D array where 1 indicates star presence)
+
+### Model Architecture
+The project uses a U-Net architecture with the following specifications:
+- Input: 1024x1024 pixel images
+- Output: Binary mask of star locations
+- Loss Function: Binary Cross-Entropy
+- Optimizer: Adam
+- Learning Rate: 0.001
+- Batch Size: 4
+- Epochs: 30+ (with early stopping)
+
+## Troubleshooting
+### Common Issues
+1. **CUDA/GPU Issues**
+   - Ensure NVIDIA drivers are properly installed
+   - Verify CUDA and cuDNN versions match TensorFlow requirements
+   - Check GPU memory usage during training
+
+2. **Memory Issues**
+   - Reduce batch size if running out of memory
+   - Use data generators for large datasets
+   - Consider using mixed precision training
+
+3. **Installation Issues**
+   - Ensure Python 3.10 is installed
+   - Verify virtual environment is activated
+   - Check system dependencies are installed
+
+## Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+Please ensure your code follows the project's coding standards and includes appropriate tests.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
